@@ -1,3 +1,4 @@
+import os
 import pickle
 from flask import Flask,request,jsonify,render_template
 import numpy as np
@@ -8,8 +9,11 @@ application = Flask(__name__)
 app=application
 
 ## import ridge regresor model and standard scaler pickle
-ridge_model=pickle.load(open('models/ridge.pkl','rb'))
-standard_scaler=pickle.load(open('models/scaler.pkl','rb'))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+ridge_model = pickle.load(open(os.path.join(BASE_DIR, 'models', 'ridge.pkl'), 'rb'))
+standard_scaler = pickle.load(open(os.path.join(BASE_DIR, 'models', 'scaler.pkl'), 'rb'))
+
 
 ## Route for home page
 @app.route('/')
